@@ -17,10 +17,10 @@ struct card{
 
 class cardlist{
 private:
-	vector<struct card> card;
+	vector<struct card> cards;
 public:
-	void make_card();
-	void remove_card();
-	void remove_user();
+	void make_card(string name,string mean,string id);
+	void remove_card(string name);
+	void remove_user(string name);
 	struct card get_card(int num);
 };
