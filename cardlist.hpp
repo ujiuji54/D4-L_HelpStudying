@@ -22,6 +22,5 @@ public:
 	void make_card();
 	void remove_card();
 	void remove_user();
-	string get_word(int num);
-	string get_mean(int num);
+	struct card get_card(int num);
 };

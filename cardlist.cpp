@@ -16,10 +16,6 @@ cardlist::void remove_user(){
 	
 }
 
-cardlist::string get_word(int num){
-	
-}
-
-cardlist::string get_mean(int num){
+cardlist::struct card get_card(int num){
 	
 }
