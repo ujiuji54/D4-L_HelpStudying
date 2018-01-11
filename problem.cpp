@@ -4,7 +4,12 @@
 using namespace std;
 
 void problem::start(){
+	switch(){
+		case 1:
+			break;
 
+		case 2:
+			
 }
 
 void problem::make_problem(){
