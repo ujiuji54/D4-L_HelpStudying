@@ -3,22 +3,36 @@
 #include <cmath>
 #include <cstring>
 #include <iostream>
-#define  P (LONG  )12671
-#define  Q (LONG  )1009
-#define  E (LONG  )6553
-#define  D (LONG  )14617
+#define  P (LONG  )12671 //素数
+#define  Q (LONG  )1009  //素数
+#define  E (LONG  )6553  //公開鍵
+#define  D (LONG  )14617 //
+
+//login true or false
+//sign up
+//delete user
+//
 
 using namespace std;
 typedef unsigned long long LONG;
 
-class RSA{
-private:
-	LONG   getl(LONG   p,LONG   q);
-	LONG   getd(LONG   p,LONG   q,LONG   e);
+class userlist{
+	public:
+		string login();
+		string delete_user();
+	private:
+		int scan_userlist();
+		string sign_up();
+};
 
-public:
-	LONG   Ec(LONG   ec, LONG   e, LONG   n);
-	LONG   Dc(LONG   ec, LONG   p, LONG   q, LONG   e);
+class RSA{
+	private:
+		LONG   getl(LONG   p,LONG   q);
+		LONG   getd(LONG   p,LONG   q,LONG   e);
+
+	public:
+		LONG   Ec(LONG   ec, LONG   e, LONG   n);
+		LONG   Dc(LONG   ec, LONG   p, LONG   q, LONG   e);
 };
 
 LONG RSA::Ec(LONG x, LONG power, LONG n){//x^power % n を求める
@@ -71,6 +85,15 @@ LONG RSA::Dc(LONG   ee,LONG   p,LONG   q,LONG   e){
 	return Ec(ee,D,p*q);
 }
 
+ userlist::login(){
+	string str;
+	cout << "ユーザーIDを入力してください" ;
+	cin >> str;
+	
+	cout << str << endl;
+	
+}
+
 int main(void){
 	int key = 59000;//暗号化対象
 	RSA rsa;
@@ -80,3 +103,4 @@ int main(void){
 	cout << "復号-> " << rsa.Dc(key,P,Q,E) << endl;
 	return 0;
 }
+
