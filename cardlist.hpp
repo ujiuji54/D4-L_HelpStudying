@@ -19,6 +19,7 @@ class cardlist{
 private:
 	vector<struct card> cards;
 public:
+    int search_card(string name);
 	void make_card(string name,string mean,string id);
 	void remove_card(string name);
 	void remove_user(string name);

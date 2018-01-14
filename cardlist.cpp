@@ -4,6 +4,10 @@
 #include"cardlist.hpp"
 using namespace std;
 
+int cardlist::search_card(string name){
+    
+}
+
 void cardlist::make_card(string name,string mean,string id){
 	card Newcard;
 	Newcard.name = name;
