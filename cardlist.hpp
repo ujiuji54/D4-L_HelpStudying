@@ -24,4 +24,6 @@ public:
 	void remove_card(string name);
 	void remove_user(string name);
 	struct card get_card(int num);
+	int get_cardlist_size();
+	void answer(string name,string id,bool result);
 };

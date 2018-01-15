@@ -31,3 +31,11 @@ void cardlist::remove_user(string name){
 card cardlist::get_card(int num){
 	
 }
+
+int cardlist::get_cardlist_size(){
+
+}
+
+void cardlist::answer(string name,string id,bool result){
+
+}
