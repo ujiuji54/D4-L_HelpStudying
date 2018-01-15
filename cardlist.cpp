@@ -4,10 +4,6 @@
 #include"cardlist.hpp"
 using namespace std;
 
-int cardlist::search_card(string name){
-    
-}
-
 void cardlist::make_card(string name,string mean,string id){
 	card Newcard;
 	Newcard.name = name;
@@ -20,22 +16,48 @@ void cardlist::make_card(string name,string mean,string id){
 	cards.push_back(Newcard);
 }
 
-void cardlist::remove_card(string name){
-	
+void cardlist::remove_card(string name,string id){
+	for(int i = 0;i < get_cardlist_size();i++){
+		if(name==cards[i].name){
+			if(cards[i].id.size == 1)cards.erase(cards.begin + i);
+			else{
+				for(int j = 0;j<(int)cards[i].id.size();j++){
+					if(id == cards[i].id[j]){
+						cards[i].id.erase(cards[i].id.begin() + j);
+						cards[i].user_correct_num.erase(cards[i].user_correct_num.begin() + j);
+						cards[i].user_incorrect_num.erase(cards[i].user_incorrect_num.begin() + j);
+					}
+				}
+			}
+		}
+	}
 }
 
 void cardlist::remove_user(string name){
 	
 }
 
-card cardlist::get_card(int num){
-	
+card cardlist::get_card(string name){
+	for(int i = 0;i < get_cardlist_size();i++){
+		if(name==cards[i].name)return cards[i];
+	}
 }
 
 int cardlist::get_cardlist_size(){
-
+	return (int) cards.size();
 }
 
 void cardlist::answer(string name,string id,bool result){
-
+	card card = get_card(name)
+	for(int i;i < (int)card.id.size();i++){
+		if(id == card.id[i]){
+			if(result == true){
+				card.user_correct_num[i]++;
+				card.correct_num++;
+			}else{
+				card.user_incorrect_num[i]++;
+				card.incorrect_num++;
+			}
+		}
+	}
 }

@@ -5,7 +5,8 @@
 #include<vector>
 using namespace std;
 
-struct card{
+class card{
+public:
 	string name;
 	string mean;
 	int correct_num;
@@ -17,13 +18,12 @@ struct card{
 
 class cardlist{
 private:
-	vector<struct card> cards;
+	vector<card> cards;
 public:
-	int search_card(string name);
 	void make_card(string name,string mean,string id);
 	void remove_card(string name);
 	void remove_user(string name);
-	struct card get_card(int num);
+	card get_card(string name);
 	int get_cardlist_size();
 	void answer(string name,string id,bool result);
 };
