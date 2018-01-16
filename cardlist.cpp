@@ -42,6 +42,8 @@ void cardlist::remove_user(string id){
 				cards[i].incorrect_num - card[i].user_incorrect_num[j];
 				cards[i].user_correct_num.erase(card[i].user_correct_num.begin + j);
 				cards[i].user_incorrect_num.erase(card[i].user_incorrect_num.begin + j);
+			}
+		}
 	}
 }
 
