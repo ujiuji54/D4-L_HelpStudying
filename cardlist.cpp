@@ -33,14 +33,26 @@ void cardlist::remove_card(string name,string id){
 	}
 }
 
-void cardlist::remove_user(string name){
-	
+void cardlist::remove_user(string id){
+	for(int i;i<get_cardlist_size();i++){
+		for(int j;j<(int)cards[i].id.size();j++){
+			if(id ==cards[i].id[j]){
+				cards[i].id.erase(card[i].id.begin() + j);
+				cards[i].correct_num - card[i].user_correct_num[j];
+				cards[i].incorrect_num - card[i].user_incorrect_num[j];
+				cards[i].user_correct_num.erase(card[i].user_correct_num.begin + j);
+				cards[i].user_incorrect_num.erase(card[i].user_incorrect_num.begin + j);
+	}
 }
 
 card cardlist::get_card(string name){
 	for(int i = 0;i < get_cardlist_size();i++){
 		if(name==cards[i].name)return cards[i];
 	}
+}
+
+card cardlist::get_card(int num){
+	return cards[i];
 }
 
 int cardlist::get_cardlist_size(){

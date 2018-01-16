@@ -22,8 +22,9 @@ private:
 public:
 	void make_card(string name,string mean,string id);
 	void remove_card(string name);
-	void remove_user(string name);
+	void remove_user(string id);
 	card get_card(string name);
+	card get_card(int num);
 	int get_cardlist_size();
 	void answer(string name,string id,bool result);
 };
