@@ -3,6 +3,12 @@
 #include <cmath>
 #include <cstring>
 #include <iostream>
+#include <string>
+#include <iomanip> //std::setw(int w)
+#include <fstream>   // ifstream, ofstream
+#include <sstream>   // istringstream, ostringstream
+#include <vector>
+
 #define  P (LONG  )12671 //素数
 #define  Q (LONG  )1009  //素数
 #define  E (LONG  )6553  //公開鍵
@@ -16,13 +22,14 @@
 using namespace std;
 typedef unsigned long long LONG;
 
-class userlist{
+class USERLIST{
 	public:
 		string login();
 		string delete_user();
 	private:
 		int scan_userlist();
 		string sign_up();
+		string login_login();
 };
 
 class RSA{
@@ -85,22 +92,63 @@ LONG RSA::Dc(LONG   ee,LONG   p,LONG   q,LONG   e){
 	return Ec(ee,D,p*q);
 }
 
- userlist::login(){
-	string str;
-	cout << "ユーザーIDを入力してください" ;
-	cin >> str;
-	
-	cout << str << endl;
-	
+string USERLIST::login(){
+	string buf;
+	string id;
+	int mode;
+	//入力ストリームの作成
+    ifstream ifs("userlist.csv", ios::in);
+    if (!ifs || !getline(ifs, buf)) { //ファイルがないもしくは空
+		cout << "ファイルがないもしくは空のため、ユーザー登録をしてください" << endl;
+		return sign_up();
+	}
+	cout << "ログインかユーザー登録か選んでください(ログイン:1　ユーザー登録:2)" << endl << "->";
+	cin >> mode;
+	while(1){
+		if	   (mode == 1) return login_login();
+		else if(mode == 2) return sign_up();
+		else			   cout << "入力が不適切です。" << endl;
+	}
+	return id;
+}
+
+string USERLIST::login_login(){
+	string id;
+	cout << "ユーザーIDを入力してください" << endl << "->";
+	cin >> id;
+	cout << id << endl;
+	return id;
+}
+
+string USERLIST::sign_up(){
+	string id;
+	cout << "ユーザーIDを入力してください" << endl << "->";
+	cin >> id;
+	cout << id << endl;
+	return id;
+}
+
+vector<string> split(string& input, char delimiter){
+    istringstream stream(input);
+    string field;
+    vector<string> result;
+    while (getline(stream, field, delimiter)) {
+        result.push_back(field);
+    }
+    return result;
 }
 
 int main(void){
-	int key = 59000;//暗号化対象
 	RSA rsa;
+	USERLIST userlist;
+	userlist.login();
+	/*
 	cout << "key -> " << key << endl;
 	//cin  >> key >> endl;
 	cout << "暗号-> " << (key = rsa.Ec(key,E,P*Q)) << endl;
 	cout << "復号-> " << rsa.Dc(key,P,Q,E) << endl;
+	*/
+	
 	return 0;
 }
 
