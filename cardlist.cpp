@@ -16,7 +16,7 @@ cardlist::cardlist(){
 }
 
 void cardlist::file_out(){
-	ofstream file("cardlist.txt", ios::binary|ios::out);
+	ofstream file("cardlist.dat", ios::binary|ios::out);
 	if (!file) {
 		cout << "出力先のdatファイルの読み込みに失敗" << endl;
 		return;
@@ -36,6 +36,18 @@ void cardlist::make_card(string name,string mean,string id){
 	Newcard.user_incorrect_num.push_back(0);
 	cards.push_back(Newcard);
 	file_out();
+}
+
+void cardlist::display(){
+	for (int i = 0; i < get_cardlist_size(); i++)cout << i <<" "<< cards[i].name << " " << cards[i].mean << " " << cards[i].correct_num << " " << cards[i].incorrect_num << endl;
+}
+
+void cardlist::display(string id) {
+	for (int i = 0; i < get_cardlist_size(); i++) {
+		for(int j = 0;j < (int)cards[i].id.size() < j++){
+			if(card[i].id.[j]==id)cout << i << " " << cards[i].name << " " << cards[i].mean << " " << cards[i].user_correct_num[j] << " " << cards[i].user_incorrect_num[j] << endl;
+		}
+	}
 }
 
 void cardlist::remove_card(string name,string id){

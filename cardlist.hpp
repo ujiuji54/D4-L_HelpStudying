@@ -22,6 +22,8 @@ private:
 	void file_out();//ファイルにデータを保存する。
 public:
 	cardlist();//コンストラクタ，ファイルからデータを取得する。
+	void display();//単語帳の全単語カードを表示する。
+	void display(string id);//単語帳のユーザのカードを表示：。
 	void make_card(string name,string mean,string id);//cardを作成する。引数(単語,意味,ユーザのid)
 	void remove_card(string name,string id);//指定した単語のcardを消す。引数(単語,ユーザのid)
 	void remove_user(string id);//指定したuserをcardlistから消す。引数(ユーザーのid)
