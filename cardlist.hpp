@@ -10,7 +10,7 @@ public:
 	string name;//単語の名前
 	string mean;//単語の意味
 	int correct_num;//ユーザ全員の正解数
-	int incorrect_num;ユーザ全員の不正解数
+	int incorrect_num;//ユーザ全員の不正解数
 	vector<string> id;//単語を登録しているユーザidのリスト
 	vector<int> user_correct_num;//ユーザ毎の正解数のリスト
 	vector<int> user_incorrect_num;//ユーザ毎の不正解数のリスト
@@ -19,6 +19,8 @@ public:
 class cardlist{
 private:
 	vector<card> cards;
+	cardlist();//コンストラクタ，ファイルからデータを取得する。
+	void file_out();ファイルにデータを保存する。
 public:
 	void make_card(string name,string mean,string id);//cardを作成する。引数(単語,意味,ユーザのid)
 	void remove_card(string name);//指定した単語のcardを消す。引数(単語)

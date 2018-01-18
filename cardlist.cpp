@@ -1,8 +1,21 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include<fstream>
 #include"cardlist.hpp"
 using namespace std;
+
+cardlist::cardlist(){
+	fstream file.open("cardlist.dat", ios::binary, ios::in);
+	file.read((char*)&cards, sizeof(cards));
+	file.close();
+}
+
+void cardlist::file_out(){
+	fstream file("cardlist.dat", ios::binary, ios::out);
+	file.write((char*)&card, sizeof(cards));
+	file.close();
+}
 
 void cardlist::make_card(string name,string mean,string id){
 	card Newcard;
@@ -14,6 +27,7 @@ void cardlist::make_card(string name,string mean,string id){
 	Newcard.user_correct_num.push_back(0);
 	Newcard.user_incorrect_num.push_back(0);
 	cards.push_back(Newcard);
+	file_out();
 }
 
 void cardlist::remove_card(string name,string id){
@@ -31,6 +45,7 @@ void cardlist::remove_card(string name,string id){
 			}
 		}
 	}
+	file_out();
 }
 
 void cardlist::remove_user(string id){
@@ -45,6 +60,7 @@ void cardlist::remove_user(string id){
 			}
 		}
 	}
+	file_out();
 }
 
 card cardlist::get_card(string name){
@@ -74,4 +90,5 @@ void cardlist::answer(string name,string id,bool result){
 			}
 		}
 	}
+	file_out();
 }
