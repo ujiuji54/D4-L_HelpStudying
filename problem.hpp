@@ -2,10 +2,11 @@
 
 #include<iostream>
 #include<string>
+#include"cardlist.hpp"
 using namespace std;
 
 class problem{
 public:
-	void start();
-	void make_problem();
+	void start(cardlist cardlist);
+	void make_problem(cardlist cardlist);
 };
