@@ -19,11 +19,11 @@ public:
 class cardlist{
 private:
 	vector<card> cards;
-	cardlist();//コンストラクタ，ファイルからデータを取得する。
 	void file_out();ファイルにデータを保存する。
 public:
+	cardlist();//コンストラクタ，ファイルからデータを取得する。
 	void make_card(string name,string mean,string id);//cardを作成する。引数(単語,意味,ユーザのid)
-	void remove_card(string name);//指定した単語のcardを消す。引数(単語)
+	void remove_card(string name,string id);//指定した単語のcardを消す。引数(単語,ユーザのid)
 	void remove_user(string id);//指定したuserをcardlistから消す。引数(ユーザーのid)
 	card get_card(string name);//指定した単語のcardを返す。引数(単語)
 	card get_card(int num);//指定した番号のcardを返す。引数(番号)

@@ -6,14 +6,16 @@
 using namespace std;
 
 cardlist::cardlist(){
-	fstream file.open("cardlist.dat", ios::binary, ios::in);
+	fstream file;
+	file.open("cardlist.dat", ios::binary|ios::in);
 	file.read((char*)&cards, sizeof(cards));
 	file.close();
 }
 
 void cardlist::file_out(){
-	fstream file("cardlist.dat", ios::binary, ios::out);
-	file.write((char*)&card, sizeof(cards));
+	fstream file;
+	file.open("cardlist.dat", ios::binary|ios::out);
+	file.write((char*)&cards, sizeof(cards));
 	file.close();
 }
 
@@ -33,7 +35,7 @@ void cardlist::make_card(string name,string mean,string id){
 void cardlist::remove_card(string name,string id){
 	for(int i = 0;i < get_cardlist_size();i++){
 		if(name==cards[i].name){
-			if(cards[i].id.size == 1)cards.erase(cards.begin + i);
+			if(cards[i].id.size() == 1)cards.erase(cards.begin() + i);
 			else{
 				for(int j = 0;j<(int)cards[i].id.size();j++){
 					if(id == cards[i].id[j]){
@@ -52,11 +54,11 @@ void cardlist::remove_user(string id){
 	for(int i;i<get_cardlist_size();i++){
 		for(int j;j<(int)cards[i].id.size();j++){
 			if(id ==cards[i].id[j]){
-				cards[i].id.erase(card[i].id.begin() + j);
-				cards[i].correct_num - card[i].user_correct_num[j];
-				cards[i].incorrect_num - card[i].user_incorrect_num[j];
-				cards[i].user_correct_num.erase(card[i].user_correct_num.begin + j);
-				cards[i].user_incorrect_num.erase(card[i].user_incorrect_num.begin + j);
+				cards[i].id.erase(cards[i].id.begin() + j);
+				cards[i].correct_num - cards[i].user_correct_num[j];
+				cards[i].incorrect_num - cards[i].user_incorrect_num[j];
+				cards[i].user_correct_num.erase(cards[i].user_correct_num.begin() + j);
+				cards[i].user_incorrect_num.erase(cards[i].user_incorrect_num.begin() + j);
 			}
 		}
 	}
@@ -70,7 +72,7 @@ card cardlist::get_card(string name){
 }
 
 card cardlist::get_card(int num){
-	return cards[i];
+	return cards[num];
 }
 
 int cardlist::get_cardlist_size(){
@@ -78,8 +80,8 @@ int cardlist::get_cardlist_size(){
 }
 
 void cardlist::answer(string name,string id,bool result){
-	card card = get_card(name)
-	for(int i;i < (int)card.id.size();i++){
+	card card = get_card(name);
+	for(int i = 0;i < (int)card.id.size();i++){
 		if(id == card.id[i]){
 			if(result == true){
 				card.user_correct_num[i]++;
