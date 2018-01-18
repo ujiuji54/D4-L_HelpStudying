@@ -19,7 +19,7 @@ public:
 class cardlist{
 private:
 	vector<card> cards;
-	void file_out();ファイルにデータを保存する。
+	void file_out();//ファイルにデータを保存する。
 public:
 	cardlist();//コンストラクタ，ファイルからデータを取得する。
 	void make_card(string name,string mean,string id);//cardを作成する。引数(単語,意味,ユーザのid)

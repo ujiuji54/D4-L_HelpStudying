@@ -6,15 +6,21 @@
 using namespace std;
 
 cardlist::cardlist(){
-	fstream file;
-	file.open("cardlist.dat", ios::binary|ios::in);
+	ifstream file("cardlist.dat", ios::binary|ios::in);
+	if (!file) {
+		cout << "入力先のdatファイルの読み込みに失敗" << endl;
+		return;
+	}
 	file.read((char*)&cards, sizeof(cards));
 	file.close();
 }
 
 void cardlist::file_out(){
-	fstream file;
-	file.open("cardlist.dat", ios::binary|ios::out);
+	ofstream file("cardlist.txt", ios::binary|ios::out);
+	if (!file) {
+		cout << "出力先のdatファイルの読み込みに失敗" << endl;
+		return;
+	}
 	file.write((char*)&cards, sizeof(cards));
 	file.close();
 }
@@ -51,8 +57,8 @@ void cardlist::remove_card(string name,string id){
 }
 
 void cardlist::remove_user(string id){
-	for(int i;i<get_cardlist_size();i++){
-		for(int j;j<(int)cards[i].id.size();j++){
+	for(int i = 0;i<get_cardlist_size();i++){
+		for(int j = 0;j<(int)cards[i].id.size();j++){
 			if(id ==cards[i].id[j]){
 				cards[i].id.erase(cards[i].id.begin() + j);
 				cards[i].correct_num - cards[i].user_correct_num[j];
@@ -68,6 +74,7 @@ void cardlist::remove_user(string id){
 card cardlist::get_card(string name){
 	for(int i = 0;i < get_cardlist_size();i++){
 		if(name==cards[i].name)return cards[i];
+		else cout << "カードが見つかりません" << endl;
 	}
 }
 
