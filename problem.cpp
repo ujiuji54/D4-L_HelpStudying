@@ -1,9 +1,10 @@
 #include<iostream>
 #include<string>
 #include"problem.hpp"
+#include"cardlist.hpp"
 using namespace std;
 
-void problem::start(){
+void problem::start(cardlist cardlist,string id){
 	int n;
 
     cout << "テスト形式を選んでください" << endl;
@@ -13,9 +14,11 @@ void problem::start(){
 	cin >> n;
 	switch(n){
 		case 1:
+			make_problem(cardlist);
 			break;
 
 		case 2:
+			make_problem(cardlist,id);
 			break;
 }
 
