@@ -4,12 +4,19 @@
 using namespace std;
 
 void problem::start(){
-	switch(){
+	int n;
+
+    cout << "テスト形式を選んでください" << endl;
+	cout << "**************************" << endl;
+	cout << "1.public_test" << endl;
+	cout << "2.private_test" << endl;
+	cin >> n;
+	switch(n){
 		case 1:
 			break;
 
 		case 2:
-			
+			break;
 }
 
 void problem::make_problem(){
