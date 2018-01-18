@@ -4,7 +4,7 @@
 #include"cardlist.hpp"
 using namespace std;
 
-void problem::start(cardlist cardlist,string id){
+void problem::start(/*cardlist cardlist,string id*/){
 	int n;
 
     cout << "テスト形式を選んでください" << endl;
@@ -12,19 +12,22 @@ void problem::start(cardlist cardlist,string id){
 	cout << "1.public_test" << endl;
 	cout << "2.private_test" << endl;
 	cin >> n;
+
 	switch(n){
 		case 1:
-			make_problem(cardlist);
+			cout << "パブリックテスト開始" << endl;
+			//make_problem(cardlist);
 			break;
 
 		case 2:
-			make_problem(cardlist,id);
+			cout << "プライベートテスト開始"<< endl;
+			//make_problem(cardlist,id);
 			break;
 }
 
-void problem::make_problem(){
+/*void problem::make_problem(){
 		
-}
+}*/
 
 int main(){
 	string word["apple","banana","cow","egg","orange"];
@@ -32,6 +35,7 @@ int main(){
 	string input;
 	int i,correct,incorrect;
 
+	start;
 	for(i=0;i<5;i++){
 		cout << "第",i,"問" << endl;
 		cout << mean[i] <<endl;

@@ -7,6 +7,6 @@ using namespace std;
 
 class problem{
 public:
-	void start(cardlist cardlist);
-	void make_problem(cardlist cardlist);
+	void start(/*cardlist cardlist*/);
+	void make_problem(/*cardlist cardlist*/);
 };
