@@ -27,6 +27,7 @@ class USERLIST{
 		string login();
 		string delete_user();
 	private:
+		LONG stoi(std::string str);
 		int scan_userlist();
 		string sign_up();
 		string login_login();
@@ -94,14 +95,42 @@ LONG RSA::Dc(LONG   ee,LONG   p,LONG   q,LONG   e){
 
 string USERLIST::login(){
 	string buf;
+	string token;
 	string id;
 	int mode;
+	vector<string> data_id(100); //全員のID
+	vector<vector<LONG> > data_pass(100, vector<LONG>(5,0)); //全員のパスワード配列
+	LONG temp;//パスワード格納用
+	int rows = 0;//行
+	vector<int> columns(100,0); //列
+	
 	//入力ストリームの作成
     ifstream ifs("userlist.csv", ios::in);
     if (!ifs || !getline(ifs, buf)) { //ファイルがないもしくは空
 		cout << "ファイルがないもしくは空のため、ユーザー登録をしてください" << endl;
 		return sign_up();
 	}
+	do {
+        istringstream stream(buf);
+        getline(stream,token,',');
+        data_id[rows] = token;//ID格納
+        while(getline(stream,token,',')){ // 区切り
+            temp = stoi(token); //文字列で読み込まれるため、整数へ変換
+            data_pass[rows][columns[rows]] = temp; // //パスワード格納
+            columns[rows]++;
+        }
+        rows++;//行更新
+  	} while(getline(ifs,buf));
+  	/* デバッグ用表示
+  	for(int i=0;i<rows;i++){
+  		cout << data_id[i] << ",";
+  		for(int j=0;j<columns[i];j++){
+  			cout << data_pass[i][j];
+  			if(j != columns[i] -1) cout << ",";
+  		}
+  		cout << endl;
+  	}
+  	*/
 	cout << "ログインかユーザー登録か選んでください(ログイン:1　ユーザー登録:2)" << endl << "->";
 	cin >> mode;
 	while(1){
@@ -136,6 +165,14 @@ vector<string> split(string& input, char delimiter){
         result.push_back(field);
     }
     return result;
+}
+
+LONG USERLIST::stoi(std::string str){
+	LONG ret;
+	std::stringstream ss;
+	ss << str;
+	ss >> ret;
+	return ret;
 }
 
 int main(void){
