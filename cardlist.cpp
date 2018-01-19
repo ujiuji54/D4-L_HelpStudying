@@ -6,6 +6,7 @@
 using namespace std;
 
 cardlist::cardlist(){
+	/*
 	ifstream file("cardlist.dat", ios::binary|ios::in);
 	if (!file) {
 		cout << "入力先のdatファイルの読み込みに失敗" << endl;
@@ -13,15 +14,21 @@ cardlist::cardlist(){
 	}
 	file.read((char*)&cards, sizeof(cards));
 	file.close();
+	*/
 }
 
 void cardlist::file_out(){
-	ofstream file("cardlist.dat", ios::binary|ios::out);
+	ofstream file("cardlist.txt");
 	if (!file) {
 		cout << "出力先のdatファイルの読み込みに失敗" << endl;
 		return;
 	}
-	file.write((char*)&cards, sizeof(cards));
+	for (int i = 0; i < get_cardlist_size(); i++){
+		file << cards[i].name << " " << cards[i].mean << " " << cards[i].correct_num << " " << cards[i].incorrect_num << endl;
+		for(int j = 0;j<(int)cards[i].id.size();j++){
+			file << cards[i].user_correct_num[j] <<" "<< cards[i].user_incorrect_num[j] << endl;
+		}
+	}
 	file.close();
 }
 
@@ -44,8 +51,8 @@ void cardlist::display(){
 
 void cardlist::display(string id) {
 	for (int i = 0; i < get_cardlist_size(); i++) {
-		for(int j = 0;j < (int)cards[i].id.size() < j++){
-			if(card[i].id.[j]==id)cout << i << " " << cards[i].name << " " << cards[i].mean << " " << cards[i].user_correct_num[j] << " " << cards[i].user_incorrect_num[j] << endl;
+		for(int j = 0;j < (int)cards[i].id.size() ; j++){
+			if(cards[i].id[j]==id)cout << i << " " << cards[i].name << " " << cards[i].mean << " " << cards[i].user_correct_num[j] << " " << cards[i].user_incorrect_num[j] << endl;
 		}
 	}
 }

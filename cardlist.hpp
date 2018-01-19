@@ -5,8 +5,7 @@
 #include<vector>
 using namespace std;
 
-class card{
-public:
+struct card{
 	string name;//単語の名前
 	string mean;//単語の意味
 	int correct_num;//ユーザ全員の正解数
