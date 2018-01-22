@@ -7,12 +7,23 @@ using namespace std;
 
 cardlist::cardlist(){
 	/*
-	ifstream file("cardlist.dat", ios::binary|ios::in);
+	ifstream file("cardlist.txt");
 	if (!file) {
 		cout << "“ü—Íæ‚Ìdatƒtƒ@ƒCƒ‹‚Ì“Ç‚Ýž‚Ý‚ÉŽ¸”s" << endl;
 		return;
 	}
-	file.read((char*)&cards, sizeof(cards));
+	card card;
+	int i=0,j;
+	while (){
+		j=0;
+		file >> card.name >> card.mean >> card.correct_num >> card.incorrect_num;
+		while(){
+			file >> card.id[j] >> card.user_correct_num[j] >> card.user_incorrect_num[j];
+			j++;
+		}
+		cards.push_back(card);
+		i++;
+	}
 	file.close();
 	*/
 }
@@ -26,8 +37,9 @@ void cardlist::file_out(){
 	for (int i = 0; i < get_cardlist_size(); i++){
 		file << cards[i].name << " " << cards[i].mean << " " << cards[i].correct_num << " " << cards[i].incorrect_num << endl;
 		for(int j = 0;j<(int)cards[i].id.size();j++){
-			file << cards[i].user_correct_num[j] <<" "<< cards[i].user_incorrect_num[j] << endl;
+			file << cards[i].id[j] <<" "<< cards[i].user_correct_num[j] <<" "<< cards[i].user_incorrect_num[j] << endl;
 		}
+		file << endl;
 	}
 	file.close();
 }
@@ -84,6 +96,7 @@ void cardlist::remove_user(string id){
 				cards[i].incorrect_num - cards[i].user_incorrect_num[j];
 				cards[i].user_correct_num.erase(cards[i].user_correct_num.begin() + j);
 				cards[i].user_incorrect_num.erase(cards[i].user_incorrect_num.begin() + j);
+				if(cards[i].id.size()==0)cards.erase(cards.begin() + i);
 			}
 		}
 	}
