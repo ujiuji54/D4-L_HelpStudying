@@ -3,15 +3,15 @@
 #include"userlist.hpp"
 #include"problem.hpp"
 using namespace std;
-int a;
 
 int main() {
+	int a,b;
 	cardlist cardlist;
 	USERLIST userlist;
 	string id;
 	id=userlist.login();//ユーザ管理担当が作成
 
-	while(a!=3){
+	while(a!=4){
 		cout << "ようこそ！　L班の完璧な英単語システムへ" <<endl;
 		cout << "項目を入力してください　1=データベース閲覧　2=テスト　3=データ削除　4=終了" <<endl;
 		cin >> a;
