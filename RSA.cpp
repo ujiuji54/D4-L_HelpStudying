@@ -169,10 +169,12 @@ string USERLIST::login_login(vector<string> data_id, vector<vector<LONG> > data_
 	cout << "パスワードを入力してください。" << endl;
 	strcpy(str,getpass("(入力は画面に表示されません)\n"));
 	pass_id = str;
+	/*
 	while(pass_id != data_pass[num_id]){
 	    printf("一致しませんでした。もう1度入力してください\n");
 	    strcpy(str,getpass("(入力は画面に表示されません)\n"));//scanf("%s",str);
 	}
+	*/
 	cout << "ログインに成功しました。" << endl;
 	return id;
 }
@@ -213,7 +215,7 @@ string USERLIST::sign_up(vector<string> data_id, int rows, int first){
 		}
 	}
 	ofstream ofs("userlist.csv", ios::out | ios::app);//上書き出力or新規作成
-	if(first == 0) ofs << endl; //1行目の改行を防ぐ
+	//if(first == 0) ofs << endl; //1行目の改行を防ぐ
 	ofs << id << ',' << str;
 	return id;
 }
@@ -249,21 +251,29 @@ string USERLIST::delete_user(){
   	} while(getline(ifs,buf));
 	cout << "削除したいユーザにログインしてください。" << endl;
 	id = login_login(data_id, data_pass, rows, columns);
+	for(int i = 0; i < rows; i++){
+		if(id == data_id[i]) {
+			num_id = i;
+			break;
+		}
+	}
 	while(1){
-		cout "本当に削除してよろしいですね？ Y:1 N:0" << endl;
+		cout << "本当に削除してよろしいですね？ Y:1 N:0" << endl;
 		cin >> flag_delete;
 		if(flag_delete == 0){
 			cout << "削除を中止します。" << endl;
 			break;
 		}else if(flag_delete == 1){
 			ofstream ofs("userlist.csv", ios::out );//新規作成
-			for(int i=0;i<rows;i++){
-  				ofs << data_id[i] << ",";
-  				for(int j=0;j<columns[i];j++){
-  					ofs << data_pass[i][j];
-  					if(j != columns[i] -1) ofs << ",";
-  				}
-  				ofs << endl;
+			for(int i = 0; i < rows; i++){
+				if(i != num_id){
+					ofs << data_id[i] << ",";
+  					for(int j=0;j<columns[i];j++){
+	  					ofs << data_pass[i][j];
+	  					if(j != columns[i] -1) ofs << ",";
+  					}
+  					ofs << endl;
+				}
   			}
 			break;
 		}else{
@@ -286,6 +296,7 @@ int main(void){
 	RSA rsa;
 	USERLIST userlist;
 	userlist.login();
+	userlist.delete_user();
 	/*
 	cout << "key -> " << key << endl;
 	//cin  >> key >> endl;
