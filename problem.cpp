@@ -11,6 +11,7 @@ void problem::start(cardlist cardlist,string id){
 	cout << "**************************" << endl;
 	cout << "1.public_test" << endl;
 	cout << "2.private_test" << endl;
+	cout << "3.メインメニューへ戻る" << endl;
 	cin >> n;
 
 	switch(n){
