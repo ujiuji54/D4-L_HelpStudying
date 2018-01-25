@@ -116,7 +116,7 @@ card cardlist::get_card(int num){
 
 int cardlist::get_card_num(string name){
 	for(int i=0;i<get_cardlist_size();i++){
-		if(name == cards[i].name)retrun i;
+		if(name == cards[i].name)return i;
 	}
 	return -1;
 }
