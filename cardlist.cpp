@@ -114,20 +114,27 @@ card cardlist::get_card(int num){
 	return cards[num];
 }
 
+int cardlist::get_card_num(string name){
+	for(int i=0;i<get_cardlist_size();i++){
+		if(name == cards[i].name)retrun i;
+	}
+	return -1;
+}
+
 int cardlist::get_cardlist_size(){
 	return (int) cards.size();
 }
 
 void cardlist::answer(string name,string id,bool result){
-	card card = get_card(name);
-	for(int i = 0;i < (int)card.id.size();i++){
-		if(id == card.id[i]){
+	int num = get_card_num(name);
+	for(int i = 0;i < (int)cards[num].id.size();i++){
+		if(id == cards[num].id[i]){
 			if(result == true){
-				card.user_correct_num[i]++;
-				card.correct_num++;
+				cards[num].user_correct_num[i]++;
+				cards[num].correct_num++;
 			}else{
-				card.user_incorrect_num[i]++;
-				card.incorrect_num++;
+				cards[num].user_incorrect_num[i]++;
+				cards[num].incorrect_num++;
 			}
 		}
 	}
