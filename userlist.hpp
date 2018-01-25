@@ -283,11 +283,11 @@ string USERLIST::delete_user(){
 	
 	return id;
 }
-
+/*
 LONG USERLIST::change_to_LONG(){
  return 
 }
-
+*/
 LONG USERLIST::stoi(string str){
 	LONG ret;
 	stringstream ss;
