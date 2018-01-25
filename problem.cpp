@@ -31,7 +31,7 @@ void problem::start(cardlist cardlist,string id){
 			break;
 
 		case 3:
-			return 0;
+			return;
 			break;
 	}
 }
