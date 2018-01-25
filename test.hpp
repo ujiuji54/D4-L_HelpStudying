@@ -1,2 +1,0 @@
-GOUENZI nisiya
-nanami
