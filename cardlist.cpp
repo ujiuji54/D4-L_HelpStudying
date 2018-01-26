@@ -6,38 +6,55 @@
 using namespace std;
 
 cardlist::cardlist(){
-	/*
-	ifstream file("cardlist.txt");
+	ifstream file("cardlist.csv");
 	if (!file) {
-		cout << "入力先のdatファイルの読み込みに失敗" << endl;
+		cout << "入力元のcsvファイルの読み込みに失敗" << endl;
 		return;
 	}
 	card card;
-	int i=0,j;
-	while (){
-		j=0;
-		file >> card.name >> card.mean >> card.correct_num >> card.incorrect_num;
-		while(){
-			file >> card.id[j] >> card.user_correct_num[j] >> card.user_incorrect_num[j];
-			j++;
+	int usersize;
+	string line,token;
+	stringstream ss;
+	
+	while(getline(file, line)){
+		getline(file,token,',');
+		card.name=token;
+		getline(file,token,',');
+		card.mean=token;
+		getline(file,token,',');
+		ss << token;
+		card.correct_num = ss;
+		getline(file,token,',');
+		ss << token;
+		ss >> card.incorrect_num;
+		getline(file, token);
+		ss << token;
+		ss >> usersize;
+		for(int i=0 ;i<usersize;i++){
+			getline(file ,token, ',');
+			card.id.push_back(token);
+			getline(file ,token, ',');
+			card.user_correct_num.push_back(token);
+			getline(file ,token, ',');
+			card.user_incorrect_num.push_back(token);
 		}
 		cards.push_back(card);
-		i++;
 	}
+
 	file.close();
-	*/
 }
 
 void cardlist::file_out(){
-	ofstream file("cardlist.txt");
+	ofstream file("cardlist.csv");
 	if (!file) {
-		cout << "出力先のdatファイルの読み込みに失敗" << endl;
+		cout << "出力先のcsvファイルの読み込みに失敗" << endl;
 		return;
 	}
 	for (int i = 0; i < get_cardlist_size(); i++){
-		file << cards[i].name << " " << cards[i].mean << " " << cards[i].correct_num << " " << cards[i].incorrect_num << endl;
+		file << cards[i].name << ", " << cards[i].mean << ", " << cards[i].correct_num << ", " << cards[i].incorrect_num << endl;
+		file << cards[i].id.size() << endl;
 		for(int j = 0;j<(int)cards[i].id.size();j++){
-			file << cards[i].id[j] <<" "<< cards[i].user_correct_num[j] <<" "<< cards[i].user_incorrect_num[j] << endl;
+			file << cards[i].id[j] <<", "<< cards[i].user_correct_num[j] <<", "<< cards[i].user_incorrect_num[j] << endl;
 		}
 		file << endl;
 	}
