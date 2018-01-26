@@ -64,6 +64,7 @@ string USERLIST::login(){
         }
         rows++;//行更新
   	} while(getline(ifs,buf));
+  	/*
   	// デバッグ用表示
   	for(int i=0;i<rows;i++){
   		cout << data_id[i] << ",";
@@ -73,7 +74,7 @@ string USERLIST::login(){
   		}
   		cout << endl;
   	}
-  	
+  	*/
 	cout << "ログインかユーザー登録か選んでください(ログイン:1　ユーザー登録:2)" << endl << "->";
 	cin >> mode;
 	while(1){
@@ -145,7 +146,7 @@ string USERLIST::sign_up(vector<string> data_id, int rows, int first){
 			if(flag_id == 0) break;
 		}
 
-		cout << "パスワードを入力してください。(4字以上)" << endl;
+		cout << "パスワードを入力してください。(4字以上20文字以内)" << endl;
 		strcpy(str,getpass("(入力は画面に表示されません)\n"));
 		while(strlen(str) < 4){
 		    printf("4字以上ではありません。もう1度入力してください。\n");
@@ -161,15 +162,22 @@ string USERLIST::sign_up(vector<string> data_id, int rows, int first){
 			break;
 		}
 	}
+	FILE* stream;
+	char c,c1;
+	if((stream = fopen("userlist.csv", "r"))){
+    	while (EOF != (c = fgetc(stream))) c1 = c;
+    }
+    fclose(stream);
+	
 	ofstream ofs("userlist.csv", ios::out | ios::app);//上書き出力or新規作成
-	//if(first == 0) ofs << endl; //1行目の改行を防ぐ
 	RSA rsa;
 	string pass_id = str;
 	vector<LONG> data_pass(4,0);
 	data_pass = change_to_LONG(pass_id);
+	if(c1 != '\n') ofs << endl;
 	ofs << id;
 	for(int i = 0; i < 4; i++){
-		ofs << ", " << (data_pass[i] = rsa.Ec(data_pass[i],E,P*Q));
+		ofs << "," << (data_pass[i] = rsa.Ec(data_pass[i],E,P*Q));
 	}
 	return id;
 }
