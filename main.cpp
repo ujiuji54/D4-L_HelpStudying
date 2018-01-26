@@ -1,13 +1,14 @@
 #include<iostream>
 #include"cardlist.hpp"
 #include"userlist.hpp"
-//#include"problem.hpp"
+#include"problem.hpp"
 using namespace std;
 
 int main() {
 	int a,b;
 	cardlist cardlist;
 	USERLIST userlist;
+	problem problem;
 	string name,mean,id;
 	id=userlist.login();//ユーザ管理担当が作成
 
@@ -44,7 +45,7 @@ int main() {
 					}
 					break;
 			case 2:
-					//plobrem.start(id,cardlist);//テスト担当が作成
+					problem.start(cardlist,id);//テスト担当が作成
 					break;
 			case 3:
 					cout << "本当にユーザーデータを削除してよ、よろしいか？　1=よろしい 2=よろしくない" << endl;

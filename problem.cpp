@@ -7,12 +7,10 @@
 #include<stdlib.h>
 using namespace std;
 
-//int GetRandom(int min , int max);　まだ使用しないためコメントアウト
-
+int GetRandom(int min , int max);
 void problem::start(cardlist cardlist,string id){
 	int n;
-
-    cout << "テスト形式を選んでください" << endl;
+	cout << "テスト形式を選んでください" << endl;
 	cout << "**************************" << endl;
 	cout << "1.public_test" << endl;
 	cout << "2.private_test" << endl;
@@ -22,7 +20,7 @@ void problem::start(cardlist cardlist,string id){
 	switch(n){
 		case 1:
 			cout << "パブリックテスト開始" << endl;
-			make_problem(cardlist);
+			//make_problem(cardlist);
 			break;
 
 		case 2:
@@ -36,7 +34,7 @@ void problem::start(cardlist cardlist,string id){
 	}
 }
 
-void problem::make_problem(/*cardlist cardlist,string id　実装前のためコメントアウト*/){
+void problem::make_problem(cardlist cardlist,string id){
 	
 	vector<string> word{"apple","banana","cow","dog","egg","fish","green","hospital","internet","japan"};
 	vector<string> mean{"りんご","ばなな","うし","いぬ","たまご","さかな","みどりいろ","びょういん","いんたーねっと","にほん"};
@@ -45,10 +43,10 @@ void problem::make_problem(/*cardlist cardlist,string id　実装前のためコ
 	int correct=0;
 	int incorrect=0;
 
-	/*for(i=0;i<10;i++){
-		word[i]=cardlist.get_card(GetRandom(1,get_cardlist_size())).name;
-		mean[i]=cardlist.get_card(GetRandom(1,get_cardlist_size())).mean;
-	}*///実装前のためコメントアウト
+	for(i=0;i<10;i++){
+		//word[i]=cardlist.get_card(GetRandom(1,get_cardlist_size())).name;
+		//mean[i]=cardlist.get_card(GetRandom(1,get_cardlist_size())).mean;
+	}
 
 	cout << "\n";
 	cout << "問題！！\n" << endl;
@@ -63,17 +61,17 @@ void problem::make_problem(/*cardlist cardlist,string id　実装前のためコ
 		if(word[i]==input){
 			cout << "\n正解！！\n" << endl;
 			correct++;
-			//answer(word[i],id,true); 実装前のためコメントアウト
+			cardlist.answer(word[i],id,true);
 		}else{
 			cout << "\n不正解！！\n" << endl;
 			incorrect++;
-			//answer(word[i],id,false); 実装前のためコメントアウト
+			cardlist.answer(word[i],id,false);
 		}
 	}
 	cout << "正解数  " << correct << endl;
 	cout << "不正解数 " << incorrect << endl;
 
-	/*cout << "問題！！\n" << endl;
+	cout << "問題！！\n" << endl;
 	cout << "以下に示される日本語の意味を持つ英単語を選択肢から選び、数字で答えなさい。\n"<< endl;
 
 	
@@ -89,9 +87,9 @@ void problem::make_problem(/*cardlist cardlist,string id　実装前のためコ
 			cout << "\nはい、違ーう！！\nわっかりやすい間違いをしてくれてありがとう！！\n" << endl;
 			incorrect++;
 		}
-	}　まだ完成していないのでコメントアウト*/
+	}
 }
 
-/*int GetRandom(int min , int max){
+int GetRandom(int min , int max){
 	return min + (int)(rand()*(max-min+1.0)/(1.0+RAND_MAX));
-} まだ使用しないのでコメントアウト*/
+}
