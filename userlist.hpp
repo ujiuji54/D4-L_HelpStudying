@@ -254,7 +254,7 @@ string USERLIST::change_to_string(vector<LONG> data_pass){
 	char str[21];
 	string pass;
 	int j;
-	for(int i = 0;; i++){
+	for(int i = 0; i < 4; i++){
 		for(j = i * 5;; j++){
 			str[j] = change_char(data_pass[i] % 63); //char型に変換
 			data_pass[i] /=  63;
@@ -266,6 +266,7 @@ string USERLIST::change_to_string(vector<LONG> data_pass){
 		}
 		if(j == i*5 || j < i*5 + 5 - 1) break;
 	}
+	str[21] = '\0';
 	pass = str; //string型に変換
 	return pass;
 }
