@@ -7,8 +7,31 @@
 #include<stdlib.h>
 using namespace std;
 
-int problem::GetRandom(int min , int max){
-	return min + (int)(rand()*(max-min+1.0)/(1.0+RAND_MAX));
+void problem::shuffle(string array,string array2, int size){
+	int i = size;
+
+	 while (i > 1) {
+		 int j = rand() % i;
+		 i--;
+		 string t = array[i];
+		 array[i] = array[j];
+		 array[j] = t;
+		 string u = array2[i];
+		 array2[i] = array[j];
+		 array2[j] = u;
+	  }
+}
+
+void problem::shuffle2(int array,int size){
+	int i = size;
+
+	 while (i > 1) {
+		 int j = rand() % i;
+		 i--;
+		 int t = array[i];
+		 array[i] = array[j];
+		 array[j] = t;
+	 }
 }
 
 void problem::start(cardlist cardlist,string id){
@@ -37,26 +60,39 @@ void problem::start(cardlist cardlist,string id){
 	}
 }
 
-void problem::make_problem(cardlist cardlist,string id){
+void problem::make_problem(cardlist cardlist){ //public
+	
+}
+
+void problem::make_problem(cardlist cardlist,string id){ 
 	
 	vector<string> word;
 	vector<string> mean;
 	string input;
-	int i;
+	int i,j;
+	int size,input2;
+	int select[4],save[4];
 	int correct=0;
 	int incorrect=0;
 
-	for(i=0;i<10;i++){
-		word.push_back(cardlist.get_card(GetRandom(1,cardlist.get_cardlist_size())).name);
-		mean.push_back(cardlist.get_card(GetRandom(1,cardlist.get_cardlist_size())).mean);
+	for(j=0;j<4;j++){
+		select[j]=j;
 	}
+
+	size=//カードリストのサイズ
+	
+	for(i=0;i<size;i++){
+		word//単語を格納
+		mean//意味を格納
+	}
+	shuffle(word,mean,size);//shuffle
 
 	cout << "\n";
 	cout << "問題！！\n" << endl;
 	cout << "以下に示される日本語の意味を持つ英単語を入力しなさい。\n" <<endl;
 
 
-	for(i=0;i<10;i++){
+	for(i=0;i<size;i++){
 		cout << "第"<< i+1 <<"問" << endl;
 		cout << mean[i] << " -> ";
 		cin >> input ;
@@ -75,20 +111,31 @@ void problem::make_problem(cardlist cardlist,string id){
 	cout << "不正解数 " << incorrect << endl;
 
 	cout << "問題！！\n" << endl;
-	cout << "以下に示される日本語の意味を持つ英単語を選択肢から選び、数字で答えなさい。\n"<< endl;
+	cout << "以下に示される英単語の意味を選択肢から選び、数字で答えなさい。\n"<< endl;
 
 	
-	for(i=0;i<5;i++){
+	for(i=0;i<size;i++){
 		cout << "第"<< i+1 <<"問" << endl;
-		cout << mean[i] << " -> ";
-		cin >> input ;
+		cout << word[i] << endl;
 
-		if(word[i]==input){
+		shuffle2(int select[4] , 4);
+		for(j=0;j<4;j++){
+			save[j]=select[j]+i;
+			cout << j+1 << "." << mean[save[j]];
+		}
+		cin >> input2 ;
+
+		if(i==save[input-1]){
 			cout << "\n正解！！\n" << endl;
 			correct++;
+			cardlist.answer(mean[i],id,true);
 		}else{
 			cout << "\nはい、違ーう！！\nわっかりやすい間違いをしてくれてありがとう！！\n" << endl;
 			incorrect++;
+			cardlist.answer(mean[i],id,false);
 		}
+		cout << "正解数  " << correct << endl;
+		cout << "不正解数 " << incorrect << endl;
+
 	}
 }
