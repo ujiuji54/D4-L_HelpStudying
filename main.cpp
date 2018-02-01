@@ -32,15 +32,15 @@ int main() {
 								break;
 							}
 						case 2:
-							cout << "名前　意味　IDの順に入力してください" << endl;
+							cout << "名前　意味　の順に入力してください" << endl;
 							cin >> name;
 							cin >> mean;
-							cin >> id;
 							cardlist.make_card(name,mean,id);
 							break;
 						case 3:
-							cout << "名前　IDの順に入力してください" << endl;
-							void remove_card(string name,string id);//指定した単語のcardを消す。引数(単語,ユーザのid)
+							cout << "名前　の順に入力してください" << endl;
+							cin >> name;
+							cardlist.remove_card(name,id);//指定した単語のcardを消す。引数(単語,ユーザのid)
 							break;
 					}
 					break;
