@@ -7,7 +7,10 @@
 #include<stdlib.h>
 using namespace std;
 
-int GetRandom(int min , int max);
+int problem::GetRandom(int min , int max){
+	return min + (int)(rand()*(max-min+1.0)/(1.0+RAND_MAX));
+}
+
 void problem::start(cardlist cardlist,string id){
 	int n;
 	cout << "テスト形式を選んでください" << endl;
@@ -36,16 +39,16 @@ void problem::start(cardlist cardlist,string id){
 
 void problem::make_problem(cardlist cardlist,string id){
 	
-	vector<string> word{"apple","banana","cow","dog","egg","fish","green","hospital","internet","japan"};
-	vector<string> mean{"りんご","ばなな","うし","いぬ","たまご","さかな","みどりいろ","びょういん","いんたーねっと","にほん"};
+	vector<string> word;
+	vector<string> mean;
 	string input;
 	int i;
 	int correct=0;
 	int incorrect=0;
 
 	for(i=0;i<10;i++){
-		//word[i]=cardlist.get_card(GetRandom(1,get_cardlist_size())).name;
-		//mean[i]=cardlist.get_card(GetRandom(1,get_cardlist_size())).mean;
+		word.push_back(cardlist.get_card(GetRandom(1,cardlist.get_cardlist_size())).name);
+		mean.push_back(cardlist.get_card(GetRandom(1,cardlist.get_cardlist_size())).mean);
 	}
 
 	cout << "\n";
@@ -88,8 +91,4 @@ void problem::make_problem(cardlist cardlist,string id){
 			incorrect++;
 		}
 	}
-}
-
-int GetRandom(int min , int max){
-	return min + (int)(rand()*(max-min+1.0)/(1.0+RAND_MAX));
 }
