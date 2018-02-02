@@ -64,7 +64,7 @@ void problem::start(cardlist& cardlist,string id){
 	}
 }
 
-void problem::make_private_problem(cardlist cardlist,string id){ //private
+void problem::make_private_problem(cardlist& cardlist,string id){ //private
 	
 }
 
