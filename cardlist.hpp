@@ -18,6 +18,7 @@ struct card{
 class cardlist{
 private:
 	vector<card> cards;
+	vector<string> split(string&, char delimiter);
 	void file_out();//ファイルにデータを保存する。
 public:
 	cardlist();//コンストラクタ，ファイルからデータを取得する。
