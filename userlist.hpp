@@ -60,12 +60,19 @@ string USERLIST::login(){
         }
         rows++;//行更新
   	} while(getline(ifs,buf));
-	cout << "ログインかユーザー登録か選んでください(ログイン:1　ユーザー登録:2)" << endl << "->";
-	cin >> mode;
 	while(1){
+		cout << "ログインかユーザー登録か選んでください(ログイン:1　ユーザー登録:2  寝る:3)" << endl << "->";
+		cin >> mode;
 		if	   (mode == 1) return login_login(data_id, data_pass, rows);
 		else if(mode == 2) return sign_up(data_id, rows, 0);
-		else			   cout << "入力が不適切です。" << endl;
+		else if(mode == 3) {
+			mode = rand() % 20;
+			printf("\x1b[44m");     /* 背景色を青に */
+			for(int i = 0; i < mode; i++) cout << "ね、";
+			cout << "寝とったらアカンで(笑)" << endl;
+			printf("\x1b[49m");     /* 背景色をデフォルトに戻す */
+		}
+		else cout << "入力が不適切です。" << endl;
 	}
 	return id;
 }
@@ -108,7 +115,15 @@ string USERLIST::login_login(vector<string> data_id, vector<vector<LONG> > data_
 			data_pass[num_id][i] = rsa.Dc(data_pass[num_id][i],P,Q,E);
 		}
 	}
-	cout << "ログインに成功しました。" << endl;
+	cout << "ログインできたよ";
+	int num = rand() % 20;
+	printf("\x1b[44m");     /* 背景色を青に */
+	for(int i = 0; i < num; i++) {
+		
+		cout << "、ということがわかる";
+	}
+	cout << endl << endl;
+	printf("\x1b[49m");     /* 背景色をデフォルトに戻す */
 	return id;
 }
 
