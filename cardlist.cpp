@@ -2,44 +2,89 @@
 #include<string>
 #include<vector>
 #include<fstream>
+#include<sstream>
 #include"cardlist.hpp"
 using namespace std;
 
+vector<string> cardlist::split(string& input, char delimiter){
+	istringstream stream(input);
+	string field;
+	vector<string> result;
+	while(getline(stream, field, delimiter)){
+		result.push_back(field);
+	}
+	return result;
+}
+
 cardlist::cardlist(){
-	/*
-	ifstream file("cardlist.txt");
+	ifstream file("cardlist.csv");
 	if (!file) {
-		cout << "入力先のdatファイルの読み込みに失敗" << endl;
+		cout << "入力元のcsvファイルの読み込みに失敗" << endl;
 		return;
 	}
+
 	card card;
-	int i=0,j;
-	while (){
-		j=0;
-		file >> card.name >> card.mean >> card.correct_num >> card.incorrect_num;
-		while(){
-			file >> card.id[j] >> card.user_correct_num[j] >> card.user_incorrect_num[j];
-			j++;
+	string line;
+	vector<string> tokens;
+
+	while(getline(file, line)){
+		//名前、意味、合計正解数、合計不正解数
+		tokens = split(line, ',');
+		card.name=tokens[0];
+		card.mean=tokens[1];
+		card.correct_num=stoi(tokens[2]);
+		card.incorrect_num=stoi(tokens[3]);
+		
+		//id
+		getline(file, line);
+		tokens = split(line, ',');
+		for(int i=0;i<(int)tokens.size();i++){
+			card.id.push_back(tokens[i]);	
+		}
+		
+		//user_correct_num
+		getline(file, line);
+		tokens = split(line, ',');
+		for(int i=0;i<(int)tokens.size();i++){
+			card.user_correct_num.push_back(stoi(tokens[i]));	
+		}
+		
+		//user_incorrect_num
+		getline(file, line);
+		tokens = split(line, ',');
+		for(int i=0;i<(int)tokens.size();i++){
+			card.user_incorrect_num.push_back(stoi(tokens[i]));	
 		}
 		cards.push_back(card);
-		i++;
 	}
+
 	file.close();
-	*/
 }
 
 void cardlist::file_out(){
-	ofstream file("cardlist.txt");
+	ofstream file("cardlist.csv");
 	if (!file) {
-		cout << "出力先のdatファイルの読み込みに失敗" << endl;
+		cout << "出力先のcsvファイルの読み込みに失敗" << endl;
 		return;
 	}
 	for (int i = 0; i < get_cardlist_size(); i++){
-		file << cards[i].name << " " << cards[i].mean << " " << cards[i].correct_num << " " << cards[i].incorrect_num << endl;
-		for(int j = 0;j<(int)cards[i].id.size();j++){
-			file << cards[i].id[j] <<" "<< cards[i].user_correct_num[j] <<" "<< cards[i].user_incorrect_num[j] << endl;
+		file << cards[i].name << ", " << cards[i].mean << ", " << cards[i].correct_num << ", " << cards[i].incorrect_num << endl;
+
+		for(int j = 0;j<(int)cards[i].id.size()-1;j++){
+			file << cards[i].id[j] << ", ";
 		}
-		file << endl;
+		file << cards[i].id[cards[i].id.size()-1] << endl;
+
+		for(int j = 0;j<(int)cards[i].id.size()-1;j++){
+			file << cards[i].user_correct_num[j] << ", ";
+		}
+		file << cards[i].user_correct_num[cards[i].id.size()-1] << endl;
+
+		for(int j = 0;j<(int)cards[i].id.size()-1;j++){
+			file << cards[i].user_incorrect_num[j] << ", ";
+		}
+		file << cards[i].user_incorrect_num[cards[i].id.size()-1] << endl;
+
 	}
 	file.close();
 }
