@@ -7,8 +7,10 @@ using namespace std;
 
 class problem{
 private:
-	int GetRandom(int min , int max);
+	void shuffle(vector<string>& array , vector<string>& array2 , int size);
+	void shuffle2(int* array , int size);
 public:
-	void start(cardlist cardlist,string id);
-	void make_problem(cardlist cardlist,string id);
+	void start(cardlist& cardlist,string id);
+	void make_public_problem(cardlist& cardlist,string id);
+	void make_private_problem(cardlist& cardlist,string id);
 };

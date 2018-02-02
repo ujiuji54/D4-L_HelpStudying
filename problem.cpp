@@ -7,11 +7,13 @@
 #include<stdlib.h>
 using namespace std;
 
-void problem::shuffle(string array,string array2, int size){
-	int i = size;
+void problem::shuffle(vector<string>& array,vector<string>& array2, int size){
+	int i;
+	int j;
 
+	 i=size;
 	 while (i > 1) {
-		 int j = rand() % i;
+		 j = rand() % i;
 		 i--;
 		 string t = array[i];
 		 array[i] = array[j];
@@ -22,11 +24,13 @@ void problem::shuffle(string array,string array2, int size){
 	  }
 }
 
-void problem::shuffle2(int array,int size){
-	int i = size;
+void problem::shuffle2(int* array,int size){
+	int i;
+	int j;
 
+	 i = size;
 	 while (i > 1) {
-		 int j = rand() % i;
+		 j = rand() % i;
 		 i--;
 		 int t = array[i];
 		 array[i] = array[j];
@@ -34,7 +38,7 @@ void problem::shuffle2(int array,int size){
 	 }
 }
 
-void problem::start(cardlist cardlist,string id){
+void problem::start(cardlist& cardlist,string id){
 	int n;
 	cout << "テスト形式を選んでください" << endl;
 	cout << "**************************" << endl;
@@ -51,7 +55,7 @@ void problem::start(cardlist cardlist,string id){
 
 		case 2:
 			cout << "プライベートテスト開始"<< endl;
-			make_problem(cardlist,id);
+			make_private_problem(cardlist,id);
 			break;
 
 		case 3:
@@ -60,12 +64,11 @@ void problem::start(cardlist cardlist,string id){
 	}
 }
 
-void problem::make_problem(cardlist cardlist){ //public
+void problem::make_private_problem(cardlist cardlist,string id){ //private
 	
 }
 
-void problem::make_problem(cardlist cardlist,string id){ 
-	
+void problem::make_public_problem(cardlist& cardlist,string id){ //public
 	vector<string> word;
 	vector<string> mean;
 	string input;
@@ -79,11 +82,11 @@ void problem::make_problem(cardlist cardlist,string id){
 		select[j]=j;
 	}
 
-	size=//カードリストのサイズ
+	size=cardlist.get_cardlist_size();
 	
 	for(i=0;i<size;i++){
-		word//単語を格納
-		mean//意味を格納
+		word.push_back(cardlist.get_card(i).name);
+		mean.push_back(cardlist.get_card(i).mean);
 	}
 	shuffle(word,mean,size);//shuffle
 
@@ -110,7 +113,7 @@ void problem::make_problem(cardlist cardlist,string id){
 	cout << "正解数  " << correct << endl;
 	cout << "不正解数 " << incorrect << endl;
 
-	cout << "問題！！\n" << endl;
+	/*cout << "問題！！\n" << endl;
 	cout << "以下に示される英単語の意味を選択肢から選び、数字で答えなさい。\n"<< endl;
 
 	
@@ -118,14 +121,14 @@ void problem::make_problem(cardlist cardlist,string id){
 		cout << "第"<< i+1 <<"問" << endl;
 		cout << word[i] << endl;
 
-		shuffle2(int select[4] , 4);
+		shuffle2(select , 4);
 		for(j=0;j<4;j++){
 			save[j]=select[j]+i;
 			cout << j+1 << "." << mean[save[j]];
 		}
 		cin >> input2 ;
 
-		if(i==save[input-1]){
+		if(i==save[input2-1]){
 			cout << "\n正解！！\n" << endl;
 			correct++;
 			cardlist.answer(mean[i],id,true);
@@ -137,5 +140,5 @@ void problem::make_problem(cardlist cardlist,string id){
 		cout << "正解数  " << correct << endl;
 		cout << "不正解数 " << incorrect << endl;
 
-	}
+	}*/
 }
