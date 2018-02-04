@@ -119,7 +119,10 @@ void cardlist::display(){
 void cardlist::display(string id) {
 	for (int i = 0; i < get_cardlist_size(); i++) {
 		for(int j = 0;j < (int)cards[i].id.size() ; j++){
-			if(cards[i].id[j]==id)cout << i << " " << cards[i].name << " " << cards[i].mean << " " << cards[i].user_correct_num[j] << " " << cards[i].user_incorrect_num[j] << endl;
+			if(cards[i].id[j]==id){
+				cout << i << " " << cards[i].name << " " << cards[i].mean << " " << cards[i].user_correct_num[j] << " " << cards[i].user_incorrect_num[j] << endl;
+				break;
+			}
 		}
 	}
 }

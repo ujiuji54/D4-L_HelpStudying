@@ -19,7 +19,7 @@ void problem::shuffle(vector<string>& array,vector<string>& array2, int size){
 		 array[i] = array[j];
 		 array[j] = t;
 		 string u = array2[i];
-		 array2[i] = array[j];
+		 array2[i] = array2[j];
 		 array2[j] = u;
 	  }
 }
@@ -77,11 +77,11 @@ void problem::make_private_problem(cardlist& cardlist,string id){
 	size=cardlist.get_cardlist_size();
 	
 	for(i=0;i<size;i++){
-		card = cardlist.get_card(i);
-		for(int j=0;j<card.id.size();j++){
-			if(card.id[j]==id){
+		for(j=0;j<(int)card.id.size();j++){
+			if(cardlist.get_card(i).id[j]==id){
 				word.push_back(cardlist.get_card(i).name);
 				mean.push_back(cardlist.get_card(i).mean);
+				break;
 			}
 		}
 	}
