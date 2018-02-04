@@ -65,20 +65,25 @@ void problem::start(cardlist& cardlist,string id){
 }
 
 void problem::make_private_problem(cardlist& cardlist,string id){
-	cardlist private_cardlist(cardlist, id);
 	vector<string> word;
 	vector<string> mean;
 	string input;
+	card card;
 	int i,j;
 	int size,input2;
 	int correct=0;
 	int incorrect=0;
 
-	size=private_cardlist.get_cardlist_size();
+	size=cardlist.get_cardlist_size();
 	
 	for(i=0;i<size;i++){
-		word.push_back(private_cardlist.get_card(i).name);
-		mean.push_back(private_cardlist.get_card(i).mean);
+		card = cardlist.get_card(i);
+		for(int j=0;j<card.id.size();j++){
+			if(card.id[j]==id){
+				word.push_back(cardlist.get_card(i).name);
+				mean.push_back(cardlist.get_card(i).mean);
+			}
+		}
 	}
 	shuffle(word,mean,size);//shuffle
 
