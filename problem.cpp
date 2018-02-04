@@ -50,7 +50,7 @@ void problem::start(cardlist& cardlist,string id){
 	switch(n){
 		case 1:
 			cout << "パブリックテスト開始" << endl;
-			//make_problem(cardlist);
+			make_public_problem(cardlist,id);
 			break;
 
 		case 2:
@@ -64,11 +64,50 @@ void problem::start(cardlist& cardlist,string id){
 	}
 }
 
-void problem::make_private_problem(cardlist& cardlist,string id){ //private
+void problem::make_private_problem(cardlist& cardlist,string id){
+	cardlist private_cardlist(cardlist, id);
+	vector<string> word;
+	vector<string> mean;
+	string input;
+	int i,j;
+	int size,input2;
+	int correct=0;
+	int incorrect=0;
+
+	size=private_cardlist.get_cardlist_size();
 	
+	for(i=0;i<size;i++){
+		word.push_back(private_cardlist.get_card(i).name);
+		mean.push_back(private_cardlist.get_card(i).mean);
+	}
+	shuffle(word,mean,size);//shuffle
+
+	cout << "\n";
+	cout << "問題！！\n" << endl;
+	cout << "以下に示される日本語の意味を持つ英単語を入力しなさい。\n" <<endl;
+
+
+	for(i=0;i<size;i++){
+		cout << "第"<< i+1 <<"問" << endl;
+		cout << mean[i] << " -> ";
+		cin >> input ;
+
+		if(word[i]==input){
+			cout << "\n正解！！\n" << endl;
+			correct++;
+			cardlist.answer(word[i],id,true);
+		}else{
+			cout << "\n不正解！！\n" << endl;
+			incorrect++;
+			cardlist.answer(word[i],id,false);
+		}
+	}
+	cout << "正解数  " << correct << endl;
+	cout << "不正解数 " << incorrect << endl;
+
 }
 
-void problem::make_public_problem(cardlist& cardlist,string id){ //public
+void problem::make_public_problem(cardlist& cardlist,string id){
 	vector<string> word;
 	vector<string> mean;
 	string input;

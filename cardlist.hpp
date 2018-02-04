@@ -22,6 +22,7 @@ private:
 	void file_out();//ファイルにデータを保存する。
 public:
 	cardlist();//コンストラクタ，ファイルからデータを取得する。
+	cardlist(cardlist cardlist, string id);//ユーザが登録している単語のみの単語帳を生成する。引数(単語帳，ユーザのid)
 	void display();//単語帳の全単語カードを表示する。
 	void display(string id);//単語帳のユーザのカードを表示：。
 	void make_card(string name,string mean,string id);//cardを作成する。引数(単語,意味,ユーザのid)

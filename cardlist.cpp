@@ -61,6 +61,16 @@ cardlist::cardlist(){
 	file.close();
 }
 
+cardlist::cardlist(cardlist cardlist, string id){
+	for(int i=0;i<cardlist.get_cardlist_size();i++){
+		for(int j=0;j<cardlist.cards[i].id.size();j++){
+			if(cardlist.cards[i].id[j]==id){
+				make_card(cardlist.cards[i].name,cardlist.cards[i].mean,id);	
+			}
+		}
+	}
+}
+
 void cardlist::file_out(){
 	ofstream file("cardlist.csv");
 	if (!file) {
@@ -185,3 +195,4 @@ void cardlist::answer(string name,string id,bool result){
 	}
 	file_out();
 }
+
